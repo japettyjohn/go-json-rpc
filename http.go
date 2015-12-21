@@ -6,7 +6,7 @@ import (
 )
 
 func MustJSONErrorHTTP(w http.ResponseWriter, errCode int, errMsg string, data interface{}) {
-	if e := jsonEncodeHTTP(JSONMessage{Error: &JSONError{errCode, errMsg, data}}); e != nil {
+	if e := jsonEncodeHTTP(w, JSONMessage{Error: &JSONError{errCode, errMsg, data}}); e != nil {
 		panic(e)
 	}
 }
@@ -16,7 +16,7 @@ func MustJSONResultHTTP(w http.ResponseWriter, d interface{}) {
 		panic("MustJsonResult does not accept nil data.")
 	}
 
-	if e := jsonEncodeHTTP(JSONMessage{Result: d}); e != nil {
+	if e := jsonEncodeHTTP(w, JSONMessage{Result: d}); e != nil {
 		panic(e)
 	}
 }
