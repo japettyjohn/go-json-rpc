@@ -53,7 +53,11 @@ type Request struct {
 }
 
 func DecodeRequest(d *json.Decoder) *Request {
-	r := &Request{Response: Response{JSONRPC: ProtocolVersion}}
+	return DecodeRequestTypedParams(d, nil)
+}
+
+func DecodeRequestTypedParams(d *json.Decoder, params interface{}) *Request {
+	r := &Request{Response: Response{JSONRPC: ProtocolVersion}, Params: params}
 	if e := d.Decode(r); e != nil {
 		r.Response.Error = &Error{Code: ParseErrorCode, Message: e.Error()}
 		return r
