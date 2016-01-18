@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	// Protocol version that must be specified on every RPC message
+	// ProtocolVersion must be specified on every RPC message
 	ProtocolVersion = "2.0"
 	// ParseErrorCode for invalid JSON was received by the server. An error occurred on the server while parsing the JSON text.
 	ParseErrorCode = -32700
@@ -35,7 +35,7 @@ func (j Error) Error() string {
 	return j.Message
 }
 
-// Resposne is what is sent in reply to any non-notification requests, see http://www.jsonrpc.org/specification#response_object
+// Response is what is sent in reply to any non-notification requests, see http://www.jsonrpc.org/specification#response_object
 type Response struct {
 	JSONRPC string      `json:"jsonrpc"`
 	Error   *Error      `json:"error,omitempty"`
