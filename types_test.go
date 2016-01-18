@@ -16,14 +16,14 @@ func (p paramsType) String() string {
 }
 
 func TestDecoding(t *testing.T) {
-	call := bytes.NewReader([]byte(`{"jsonrpc":"2.0","method":"test", "params": {"firstName":"Joe","lastName":"D."}, "Id":1}`))
+	call := bytes.NewReader([]byte(`{"jsonrpc":"2.0","method":"test", "params": {"firstName":"Joe","lastName":"D."}, "id":1}`))
 	req := DecodeRequest(json.NewDecoder(call))
 	if req.Response.Error != nil {
 		t.Fatal(req.Response.Error)
 	}
 
 	//	 Check ID
-	if id, ok := req.Response.Id.(float64); !ok {
+	if id, ok := req.Response.ID.(float64); !ok {
 		t.Fatalf("Did not get expected id type of float64")
 	} else if id != float64(1) {
 		t.Fatalf("Did not get expected id of 1.")
